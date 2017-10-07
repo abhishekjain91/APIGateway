@@ -1,0 +1,12 @@
+<div class="row">
+ <div class="col-md-12">
+  <h3 class="author-name">Author Name: {{author.name}}</h3>
+ </div>
+</div>
+ <h4> Quotes: </h4><br>
+<div ng-repeat="q in author.quotes" class="row" >
+ <div class="col-md-12">
+ <br>
+  <p class="author-quote">{{q.text}}</p>
+ </div>
+</div>

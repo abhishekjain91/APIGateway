@@ -1,0 +1,15 @@
+<div class="row">
+ <div class="col-md-12">
+  <h3 class="quote-text text-center">{{quote.text}}</h3>
+ </div>
+</div>
+<div class="row">
+ <div class="col-md-12">
+ <!-- Add an hyperlink to the name of the author. In order to identify the authors differently, assigning id as per their order in list -->
+ <a ui-sref="author({authorId: quote.author.id})">
+  <p class="text-right">- {{quote.author.name}}</p>
+ </a>
+ </div>
+</div>
+
+<a ui-sref="add" class="quote-add">Add</a>
