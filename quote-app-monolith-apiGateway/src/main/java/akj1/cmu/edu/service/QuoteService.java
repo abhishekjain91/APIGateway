@@ -2,13 +2,18 @@ package akj1.cmu.edu.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import akj1.cmu.edu.model.AuthorModel;
 import akj1.cmu.edu.model.QuoteModel;
 
@@ -21,16 +26,10 @@ public class QuoteService {
 	// this string contains the final URL to hit.
 	private String finalURL;
 	// Used to call a rest service
+	@Autowired
+	@LoadBalanced
 	RestTemplate restTemplate = new RestTemplate();
 	
-	// Get random quote and its author
-	public QuoteModel getRandomQuote() {
-		// Make URL
-		finalURL = quoteURL + "api/quote/random";
-		// Call service
-		QuoteModel randomQuote = restTemplate.getForObject(finalURL, QuoteModel.class);
-        return randomQuote;
-	}
 	// Get all quotes of one author
 	public List<QuoteModel> getQuotes(Long authorID) {
 		finalURL = quoteURL+"api/quote/" + authorID;
